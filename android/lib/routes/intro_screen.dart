@@ -13,8 +13,12 @@ class _IntroScreenState extends State<IntroScreen> {
       body: Container(
         child: Stack(
           children: <Widget>[
-            Image(
-              image: AssetImage("assets/images/introbg.png"),
+            FittedBox(
+              fit: BoxFit.fitWidth,
+              child: Image(
+                width: MediaQuery.of(context).size.width,
+                image: AssetImage("assets/images/introbg.png"),
+              ),
             ),
             Column(
               mainAxisAlignment: MainAxisAlignment.center,

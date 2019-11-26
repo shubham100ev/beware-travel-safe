@@ -4,12 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-class RootScreen extends StatefulWidget {
+class RouteScreen extends StatefulWidget {
   @override
-  _RootScreenState createState() => _RootScreenState();
+  _RouteScreenState createState() => _RouteScreenState();
 }
 
-class _RootScreenState extends State<RootScreen> {
+class _RouteScreenState extends State<RouteScreen> {
   GoogleMapController mapController;
   Position position;
   Widget _child;
@@ -59,7 +59,9 @@ class _RootScreenState extends State<RootScreen> {
                     left: MediaQuery.of(context).size.width / 2.2),
                 child: CircularProgressIndicator(
                   valueColor: AlwaysStoppedAnimation<Color>(Color(0xFF7B65E4)),
-                )),
+                ))
+          else
+            _child,
           Container(
             padding: EdgeInsets.only(bottom: 24.0),
             child: Column(
@@ -167,7 +169,7 @@ class _RootScreenState extends State<RootScreen> {
       markers: _createMarker(),
       initialCameraPosition: CameraPosition(
         target: LatLng(position.latitude, position.longitude),
-        zoom: 15,
+        zoom: 12,
       ),
       onMapCreated: (GoogleMapController controller) {
         mapController = controller;
@@ -183,6 +185,12 @@ class _RootScreenState extends State<RootScreen> {
         icon: BitmapDescriptor.defaultMarker,
         infoWindow: InfoWindow(title: "current location"),
       ),
+      Marker(
+        markerId: MarkerId("current location"),
+        position: LatLng(position.latitude+0.023,position.longitude),
+        icon: BitmapDescriptor.defaultMarker,
+        infoWindow: InfoWindow(title: "current location"),
+      )
     ].toSet();
   }
 }
